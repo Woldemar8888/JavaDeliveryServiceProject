@@ -4,29 +4,38 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
+  
+   <servlet>
     <description></description>
-    <display-name>HelloServlet</display-name>
-    <servlet-name>HelloServlet</servlet-name>
-    <servlet-class>by.epamtc.aladzyin.HelloServlet</servlet-class>
+    <display-name>RegisterController</display-name>
+    <servlet-name>RegisterController</servlet-name>
+    <servlet-class>by.epamtc.aladzyin.RegisterController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>HelloServlet</servlet-name>
-    <url-pattern>/register</url-pattern>
+    <servlet-name>RegisterController</servlet-name>
+    <url-pattern>/controller</url-pattern>
   </servlet-mapping>
-  
-  
+   
   <servlet>
     <description></description>
-    <display-name>LoginServlet</display-name>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>by.epamtc.aladzyin.LoginServlet</servlet-class>
+    <display-name>WelcomeServlet</display-name>
+    <servlet-name>WelcomeServlet</servlet-name>
+    <servlet-class>by.epamtc.aladzyin.WelcomeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/login</url-pattern>
+    <servlet-name>WelcomeServlet</servlet-name>
+    <url-pattern>/welcome</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+     <servlet-name>register</servlet-name>
+     <jsp-file>/WEB-INF/jsp/register.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>register</servlet-name>
+     <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+    
   <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>by.epamtc.aladzyin.EncodingFilter</filter-class>

@@ -15,10 +15,14 @@
 	padding: 7px;
 }
 
+
+
+
+
 #login-form input, #register-form input {
 	display: block;
 	width: 100%;
-	margin: 7px 0;
+	margin: 2px 0 10px;
 	font-size: 16px;
 	padding: 3px;
 }

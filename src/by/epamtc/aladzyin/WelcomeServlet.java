@@ -13,24 +13,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class LoginServlet extends HttpServlet {
+public class WelcomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-    public LoginServlet() {
+    public WelcomeServlet() {
         super();
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setContentType("text/html");
+		response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		String login = request.getParameter("login");
+		String login = request.getParameter("login").trim();
 		String password = request.getParameter("password");
 		String answer;
 		String userName="";
+		String dbLogin;
+		String dbPassword;
+		boolean isUserExist = false;
 		
 		
 		try{
@@ -45,20 +49,27 @@ public class LoginServlet extends HttpServlet {
             	Statement statement = conn.createStatement();
             	ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
             	while(resultSet.next()){
-            		String name = resultSet.getString("name");              
-            	    userName = name;
-            	    
+            		dbLogin = resultSet.getString("login");
+            		if(login.equals(dbLogin)) {
+            			dbPassword = resultSet.getString("password");
+            			if(password.equals(dbPassword)) {
+            				String dbName = resultSet.getString("name");
+            				userName = dbName;
+            				isUserExist = true;
+            				break;
+            			}
+            		}  
             	}	
              }  
         } catch(Exception ex){
         	answer = "Connection failed..." + ex +	"<a href=\"/delivery_service/index.jsp\">TO LOGIN PAGE</a>";
         } finally {
-        	if( login.equals("boss") && password.equals("boss") ) {
+        	if( isUserExist ) {
     			answer = "<h1>WELCOME PAGE</h1>"
     					+ "<h2>HELLO " + userName + "</h2>" 
     					+ 	"<a href=\"/delivery_service/index.jsp\">TO LOGIN PAGE</a>";
     		}else {
-    			answer = "<h1>INCORRECT</h1>"
+    			answer = "<h1>INCORRECT LOGIN OR PASSWORD</h1>"
     					+ 	"<a href=\"/delivery_service/index.jsp\">TO LOGIN PAGE</a>";
     		}
     		
@@ -66,11 +77,11 @@ public class LoginServlet extends HttpServlet {
     				+ 		"<html>"
     				+ 		"<head>"
     				+ 			"<meta charset=\"UTF-8\">"
-    				+ 			"<title>Delivery service</title>"
+    				+ 			"<title>Служба доставки - главная</title>"
     				+ 	    	"<link rel=\"stylesheet\" href=\"style.css\"/>"
     				+ 		"</head>"
     				+ 		"<body>"
-    				+		answer
+    				+			answer
     				+ 		"</body>"
     				+ 		"</html>");
         	
