@@ -1,0 +1,18 @@
+package by.epamtc.aladzyin.service;
+
+public class ServiceProvider {
+	
+	private static final ServiceProvider instance = new ServiceProvider();
+	
+	private ServiceProvider() {}
+	
+	private  ClientService clientService = new ClientServiceImpl();
+	
+	public ClientService getClientService() {
+		return clientService;
+	}
+	
+	public static ServiceProvider  getInstance() {
+		return instance;
+	}
+}

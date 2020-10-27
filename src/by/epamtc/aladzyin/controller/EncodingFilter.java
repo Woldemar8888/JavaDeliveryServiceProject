@@ -1,4 +1,4 @@
-package by.epamtc.aladzyin;
+package by.epamtc.aladzyin.controller;
 
 import javax.servlet.*;
 import java.io.IOException;
