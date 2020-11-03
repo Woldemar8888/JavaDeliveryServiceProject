@@ -43,4 +43,29 @@ public class ClientServiceImpl implements ClientService {
 			throw new ServiceException(e);
 		}
 	}
+
+	@Override
+	public boolean updateUser(User user) throws ServiceException {
+		DAOProvider daoProvider = DAOProvider.getInstance();
+		UserDAO userDAO = daoProvider.getUserDAO();
+		
+		try {
+			return userDAO.updateUser(user);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
+	public boolean deleteUser(User user) throws ServiceException {
+		
+		DAOProvider daoProvider = DAOProvider.getInstance();
+		UserDAO userDAO = daoProvider.getUserDAO();
+		
+		try {
+			return userDAO.deleteUser(user);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
 }

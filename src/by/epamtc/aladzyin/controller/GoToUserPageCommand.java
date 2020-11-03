@@ -8,18 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import by.epamtc.aladzyin.bean.User;
-import by.epamtc.aladzyin.service.ClientService;
-import by.epamtc.aladzyin.service.ServiceException;
-import by.epamtc.aladzyin.service.ServiceProvider;
+public class GoToUserPageCommand implements Command {
 
-public class GoToAuthorizationPageCommand implements Command {
-	
-	private static final String AUTHORIZATION_PAGE = "/WEB-INF/jsp/login.jsp";
+	private static final String USER_PAGE = "/WEB-INF/jsp/userPage.jsp";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher(AUTHORIZATION_PAGE);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(USER_PAGE);
 		dispatcher.forward(request, response);
 	}
+
 }

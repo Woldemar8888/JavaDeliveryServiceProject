@@ -2,33 +2,25 @@ package by.epamtc.aladzyin.controller;
 
 import java.io.IOException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ChangeLocale implements Command {
+	private static final String PARAMETER_LOCAL = "local";
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		
-		String newLocale;
-		HttpSession session;
-		
-		newLocale = request.getParameter("locale");
-		
-		session = request.getSession(true);
-		session.setAttribute("locale", newLocale);
-		
-		String url = (String) request.getSession(false).getAttribute("prev_request");
-		
-		if(url == null) {
-			url = "http://localhost:8081/delivery_dervice/controller?command=go_to_index";
-		}
-		
-		try {
-			response.sendRedirect(url);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    private static final String ATTRIBUTE_PREVIOUS_REQUEST = "previous_request";
+
+    @Override
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String local = request.getParameter(PARAMETER_LOCAL);
+        String previousRequest = (String) session.getAttribute(ATTRIBUTE_PREVIOUS_REQUEST);
+        session.setAttribute(PARAMETER_LOCAL, local);
+
+       
+        response.sendRedirect(previousRequest); 		
+    }
+	
 }

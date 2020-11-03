@@ -4,8 +4,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	text-align: center;
-	
+	text-align: center;	
 }
 
 html, body {
@@ -18,17 +17,11 @@ html, body {
 	border-right: 1px solid black;
 	border-left: 1px solid black;
 	height: 100vh;
-	
-	
 }
 
 header {
 	padding: 10px;
-	
-	
 }
-
-    
 
 #logo {
 	display: inline-block;
@@ -37,8 +30,23 @@ header {
     position: relative;
     bottom: -5px;
     color: green;
-    font-weight: bold;
-    
+    font-weight: bold; 
+}
+
+#localization {
+	display: inline-block;
+	width: 40%;
+}
+
+#localization form {
+	display: inline;
+}
+
+#localization form button {
+	font-size: 22px;
+	cursor: pointer;
+	padding: 3px;
+	margin: 3px;
 }
 
 ul {
@@ -47,8 +55,7 @@ ul {
 
 nav {
 	display: inline-block;
-	width: calc(70% - 10px);
-	
+	width: calc(30% - 10px);
 }
 
 
@@ -65,8 +72,18 @@ nav ul li {
 	font-size: 20px;
 }
 
+nav ul li a {
+	text-decoration: none;
+}
+
 nav ul li a:hover {
 	color:green;
+}
+
+#helloUser{
+	padding: 20px 10px;
+	font-size: 20px;
+	color: green;
 }
 
 
@@ -84,8 +101,6 @@ footer {
 	padding: 7px;
 }
 
-
-
 #login-form input, #register-form input {
 	display: block;
 	width: 100%;
@@ -98,5 +113,44 @@ footer {
 	border: 1px solid black;
 	background: #aaa;
 	font-size: 20px;
+	margin: 20px 0;
 	font-style: italic;
 }
+
+.user-page a {
+	cursor: pointer;
+	text-decoration: none;
+	display: block;
+}
+
+.link-block {
+	margin-top: 20px;
+}
+
+#delete-user-modal {
+	margin: 50px auto;
+	padding: 20px 20px 30px;
+	border: 1px solid black;
+	background: #aaa;
+	width: 400px;
+	
+}
+
+#delete-user-modal h4{
+	font-size: 26px;
+	font-weight: normal;
+	margin-bottom: 40px;	
+}
+
+#delete-user-modal a{
+	text-decoration: none;
+    cursor: pointer;
+    border: 1px solid black;
+    background: #696969;
+    padding: 7px 15px;
+    margin: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;	
+}
+

@@ -2,7 +2,6 @@ package by.epamtc.aladzyin.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,13 +12,16 @@ import by.epamtc.aladzyin.service.ClientService;
 import by.epamtc.aladzyin.service.ServiceException;
 import by.epamtc.aladzyin.service.ServiceProvider;
 
-public class GoToAuthorizationPageCommand implements Command {
+public class EditUserData implements Command {
 	
-	private static final String AUTHORIZATION_PAGE = "/WEB-INF/jsp/login.jsp";
+	private static final String USER_PAGE = "controller?command=go_to_user_page";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher(AUTHORIZATION_PAGE);
-		dispatcher.forward(request, response);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("isEditMode", true);
+		
+		response.sendRedirect(USER_PAGE);
 	}
 }

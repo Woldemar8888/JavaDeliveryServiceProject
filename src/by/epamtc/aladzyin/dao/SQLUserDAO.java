@@ -11,8 +11,10 @@ import by.epamtc.aladzyin.bean.User;
 public class SQLUserDAO implements UserDAO {
 	
 	private static final String QUERY_CHECK_CREDENTIAL = "SELECT * FROM users WHERE login = ? and password = ?";
-	private static final String QUERY_REGISTATION = "INSERT INTO users(name, surname, phone, login, password) VALUES ( ?, ?, ? ,?, ?);";
-	private static final String  URL = "jdbc:mysql://localhost/delivery_service?serverTimezone=Europe/Moscow&useSSL=false";
+	private static final String QUERY_REGISTATION = "INSERT INTO users(name, surname, phone, login, password) VALUES ( ?, ?, ?, ?, ?);";
+	private static final String QUERY_UPDATE_USER = "UPDATE users SET name = ?, surname = ?, phone = ?, password = ? WHERE login = ? ;";
+	private static final String QUERY_DELETE_USER = "DELETE FROM users WHERE login = ? ;";
+	private static final String URL = "jdbc:mysql://localhost/delivery_service?serverTimezone=Europe/Moscow&useSSL=false";
 	private static final String USERNAME = "root";
 	private static final String DBPASSWORD = "password";
 	
@@ -60,8 +62,6 @@ public class SQLUserDAO implements UserDAO {
 	@Override
 	public boolean registration(User user) throws DAOException {
 		
-		
-		
 		try{ 
                      
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -72,11 +72,72 @@ public class SQLUserDAO implements UserDAO {
                 preparedStatement.setString(1, user.getName());
                 preparedStatement.setString(2, user.getSurname());
                 preparedStatement.setString(3, user.getPhone());
-                preparedStatement.setString(4, user.getLogin());
-                preparedStatement.setString(5, user.getPassword());
+                preparedStatement.setString(4, user.getPassword());
+                preparedStatement.setString(5, user.getLogin());
+                
                
                 int rows = preparedStatement.executeUpdate();
             	
+            	if(rows == 1) {
+            		return true;
+            	}
+             } catch(SQLException e) {
+     			throw new DAOException(e);  
+             } 	
+		
+		} catch(ClassNotFoundException e) {
+ 			throw new DAOException(e);  
+        } 
+		
+		return false;
+	}
+
+
+	@Override
+	public boolean updateUser(User user) throws DAOException {
+		try{ 
+            
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            try (Connection conn = DriverManager.getConnection(URL, USERNAME, DBPASSWORD) ){
+            	
+            	PreparedStatement preparedStatement = conn.prepareStatement(QUERY_UPDATE_USER);
+                preparedStatement.setString(1, user.getName());
+                preparedStatement.setString(2, user.getSurname());
+                preparedStatement.setString(3, user.getPhone());
+                preparedStatement.setString(4, user.getPassword());
+                preparedStatement.setString(5, user.getLogin());
+               
+                int rows = preparedStatement.executeUpdate();
+                
+            	if(rows == 1) {
+            		return true;
+            	}
+             } catch(SQLException e) {
+     			throw new DAOException(e);  
+             } 	
+		
+		} catch(ClassNotFoundException e) {
+ 			throw new DAOException(e);  
+        } 
+		
+		return false;
+	}
+	
+	@Override
+	public boolean deleteUser(User user) throws DAOException {
+		try{ 
+            
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            try (Connection conn = DriverManager.getConnection(URL, USERNAME, DBPASSWORD) ){
+            	
+            	PreparedStatement preparedStatement = conn.prepareStatement(QUERY_DELETE_USER);
+                
+                preparedStatement.setString(1, user.getLogin());
+               
+                int rows = preparedStatement.executeUpdate();
+                
             	if(rows == 1) {
             		return true;
             	}
