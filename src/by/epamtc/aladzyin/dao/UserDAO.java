@@ -1,6 +1,7 @@
 package by.epamtc.aladzyin.dao;
 
 import by.epamtc.aladzyin.bean.User;
+import by.epamtc.aladzyin.dao.exception.DAOException;
 
 public interface UserDAO {
 	

@@ -29,45 +29,42 @@
     <fmt:message bundle="${loc}" key="copyright" var="copyright"/>
 	
 </head>
-<body>
-	<div class="container">
-		<header>
+<body>	
+	<header>
+		<div class="container">
 			<div id="logo">
 				L O G O
 			</div>
 			<div id="localization">
-                    <form action="controller?command=change_locale" method="post">
-                        <input type="hidden" name="local" value="ru"/>
-                        <button type="submit">${button_ru}</button>
-                    </form>
-                    <form action="controller?command=change_locale" method="post">
-                        <input type="hidden" name="local" value="en"/>
-                        <button type="submit">${button_en}</button>
-                    </form>
-            </div>
+	            <form action="controller?command=change_locale" method="post">
+	                <input type="hidden" name="local" value="ru"/>
+	                <button type="submit">${button_ru}</button>
+	            </form>
+	            <form action="controller?command=change_locale" method="post">
+	                 <input type="hidden" name="local" value="en"/>
+	                 <button type="submit">${button_en}</button>
+	            </form>
+	        </div>
 			<nav>
 				<ul>
 					<c:if test="${empty sessionScope.user}">
-        				<li><a href="controller?command=go_to_authorization_page">${log_in}</a><li>
-        				<li><a href="controller?command=go_to_registration_page">${registration}</a><li>
-    				</c:if>
-    				<c:if test="${not empty sessionScope.user}">
-        				<li><a href="controller?command=logout">${log_out}</a><li>
-    				</c:if>
-					
-					
+	        			<li><a href="controller?command=go_to_authorization_page">${log_in}</a><li>
+	        			<li><a href="controller?command=go_to_registration_page">${registration}</a><li>
+	    			</c:if>
+	    				<c:if test="${not empty sessionScope.user}">
+	        				<li><a href="controller?command=logout">${log_out}</a><li>
+	    			</c:if>
 				</ul>
 			</nav>
 			<c:if test="${not empty sessionScope.user}">
-        		<div id="helloUser">
+	        	<div id="helloUser">
 					${hello} <a href="controller?command=go_to_user_page"
-								class="user-page-link"
-								title="to user page">${user.name}</a>
+									class="user-page-link"
+									title="to user page">${user.name}</a>
 				</div>
-    		</c:if>
-			
-		</header>
-	</div>
+	    	</c:if>
+		</div>	
+	</header>
 	<footer>
 			${copyright}
 	</footer>

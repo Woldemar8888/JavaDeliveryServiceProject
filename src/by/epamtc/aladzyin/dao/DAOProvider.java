@@ -1,5 +1,7 @@
 package by.epamtc.aladzyin.dao;
 
+import by.epamtc.aladzyin.dao.impl.SQLUserDAO;
+
 public class DAOProvider {
 	
 	private static final DAOProvider instance = new DAOProvider();

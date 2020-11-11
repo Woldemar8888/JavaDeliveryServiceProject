@@ -1,9 +1,9 @@
 package by.epamtc.aladzyin.service;
 
 import by.epamtc.aladzyin.bean.User;
-import by.epamtc.aladzyin.dao.DAOException;
 import by.epamtc.aladzyin.dao.DAOProvider;
 import by.epamtc.aladzyin.dao.UserDAO;
+import by.epamtc.aladzyin.dao.exception.DAOException;
 import by.epamtc.aladzyin.service.validation.CredentionalValidator;
 
 public class ClientServiceImpl implements ClientService {

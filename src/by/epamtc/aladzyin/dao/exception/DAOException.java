@@ -1,4 +1,4 @@
-package by.epamtc.aladzyin.dao;
+package by.epamtc.aladzyin.dao.exception;
 
 public class DAOException extends Exception {
 	
