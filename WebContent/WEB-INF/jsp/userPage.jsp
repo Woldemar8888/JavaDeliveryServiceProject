@@ -28,10 +28,26 @@
     <fmt:message bundle="${loc}" key="userdata.link.edit" var="edit"/>
     <fmt:message bundle="${loc}" key="userdata.link.save" var="save"/>
     <fmt:message bundle="${loc}" key="userdata.link.delete" var="delete"/>
+    <fmt:message bundle="${loc}" key="userdata.link.show_orders" var="show_orders"/>
+    <fmt:message bundle="${loc}" key="userdata.link.hide_orders" var="hide_orders"/>
+    <fmt:message bundle="${loc}" key="userdata.link.add_order" var="add_order"/>
     <fmt:message bundle="${loc}" key="userdata.modal.question" var="sure"/>
     <fmt:message bundle="${loc}" key="userdata.modal.answer.yes" var="yes"/>
     <fmt:message bundle="${loc}" key="userdata.modal.answer.no" var="no"/>
-    
+    <fmt:message bundle="${loc}" key="userdata.orders.order_id" var="order_id"/>
+    <fmt:message bundle="${loc}" key="userdata.orders.status" var="status"/>
+    <fmt:message bundle="${loc}" key="userdata.orders.date_in" var="date_in"/>
+    <fmt:message bundle="${loc}" key="userdata.orders.town" var="town"/>
+    <fmt:message bundle="${loc}" key="userdata.order.goods.name" var="product_name"/>
+    <fmt:message bundle="${loc}" key="general.link.details" var="details"/>
+    <fmt:message bundle="${loc}" key="general.link.hide" var="hide"/>
+    <fmt:message bundle="${loc}" key="general.link.show" var="show"/>
+    <fmt:message bundle="${loc}" key="general.count" var="count"/>
+    <fmt:message bundle="${loc}" key="general.weight" var="weight"/>
+    <fmt:message bundle="${loc}" key="general.total_weight" var="total_weight"/>
+    <fmt:message bundle="${loc}" key="general.volume" var="volume"/>
+    <fmt:message bundle="${loc}" key="general.total_volume" var="total_volume"/>
+   
 	
 </head>
 <body>
@@ -63,6 +79,14 @@
 				<div class="link-block">
 					<a href="controller?command=edit_userdata">${edit}</a>
 	        		<a href="controller?command=show_delete_profile_modal">${delete}</a>
+	        		<div class="separator"></div>
+	        		<c:if test="${sessionScope.isShowOrdersMode}">
+       					<a href="controller?command=hide_user_orders">${hide_orders}</a>
+    				</c:if>
+    				<c:if test="${not sessionScope.isShowOrdersMode}">
+       					<a href="controller?command=show_user_orders">${show_orders}</a>
+    				</c:if>
+	        		<a href="controller?command=add_order">${add_order}</a>
 				</div>
 	        	
 	    	</c:if>
@@ -77,7 +101,90 @@
         	</div>
         </div>
     </c:if>
-	
+    <c:if test="${sessionScope.isShowOrdersMode}">
+        <div>
+        	<table id="user_orders">
+        		<tr>
+        			<th>${order_id}</th>
+        			<th>${status}</th>
+        			<th>${date_in}</th>
+        			<th>${town}</th>
+        			<th>${details}</th>
+        		<tr>
+        		<c:forEach var="order" items="${sessionScope.userOrderList}">
+    				<tr>
+    				
+    					<td>${order.order_id}</td>
+    					
+    					<td>
+    						<c:if test="${user.role_id eq 3 or user.role_id eq 2 or  user.role_id eq 4}">
+    							<form action="controller?command=save_orderdata_changes" method="post">
+    								<input type="hidden" name="order_id" value="${order.order_id}"/>
+    								<select id="${order.order_id}" name="order_status" defaultValue="${order.status}">
+    									<option value="не подтвержден" <c:if test="${order.status eq \"не подтвержден\"}">selected</c:if>>Не подтвержден</option>
+    									<option value="принят" <c:if test="${order.status eq \"принят\"}">selected</c:if>>Принят</option>
+    									<option value="выполнен" <c:if test="${order.status eq \"выполнен\"}">selected</c:if> >Выполнен</option>
+    							</select>
+    								<input type="submit" value="${save}"/>
+    							</form>
+    						</c:if>
+    						
+    						<c:if test="${user.role_id eq 1 }">
+    							${order.status}
+    						</c:if>
+    					</td>
+    					
+    					<td>${order.date_in}</td>
+    					
+    					<td>${order.town}</td>
+    					
+    					<td>
+    						<c:if test="${not sessionScope.isShowOrderDelailsMode}">
+    							<form action="controller?command=show_order_details" method="post">
+    								<input type="hidden" name="order_id" value="${order.order_id}"/>
+    								<input type="submit" value="${show}"/>
+    							</form>
+    						</c:if>
+    						<c:if test="${sessionScope.isShowOrderDelailsMode}">
+    							<c:if test = "${sessionScope.currentOrderId eq order.order_id}">
+    								<form action="controller?command=hide_order_details" method="post">
+    									<input type="hidden" name="order_id" value="${order.order_id}"/>
+    									<input type="submit" value="${hide}"/>
+    								</form>
+    							</c:if>
+    							
+    						</c:if>
+    					</td>
+    				</tr>
+				</c:forEach>
+        	</table>
+        </div>
+    </c:if>
+    <c:if test="${sessionScope.isShowOrderDelailsMode }">
+    	<div class="separator"></div>
+    	<div>
+    		<table id="order_goods">
+    			<tr>
+        			<th>${product_name}</th>
+        			<th>${count}</th>
+        			<th>${weight}</th>
+        			<th>${total_weight}</th>
+        			<th>${volume}</th>
+        			<th>${total_volume}</th>
+        		<tr>
+        		<c:forEach var="product" items="${sessionScope.userOrderProductList}">
+        			<tr>
+        				<td>${product.name}</td>
+        				<td>${product.count}</td>
+        				<td>${product.weight}</td>
+        				<td>${product.weight*product.count}</td>
+        				<td>${product.volume}</td>
+        				<td>${product.volume*product.count}</td>
+        			</tr>
+        		</c:forEach>
+    		</table>
+    	</div>
+	</c:if>
 	
 	
 </body>

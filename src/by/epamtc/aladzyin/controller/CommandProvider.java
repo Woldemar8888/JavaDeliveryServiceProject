@@ -13,6 +13,12 @@ public class CommandProvider  {
 		commands.put("authorization", new Authorization());
 		commands.put("registration", new Registration());
 		commands.put("edit_userdata", new EditUserData());
+		commands.put("save_orderdata_changes", new SaveOrderData());
+		commands.put("show_user_orders", new ShowUserOrders());
+		commands.put("show_order_details", new ShowOrderDetails());
+		commands.put("hide_user_orders", new HideUserOrders());
+		commands.put("hide_order_details", new HideOrderDetails());
+		commands.put("add_order", new AddOrder());
 		commands.put("show_delete_profile_modal", new DeleteProfileModal());
 		commands.put("delete_profile", new DeleteProfile());
 		commands.put("cancel_delete_profile", new CancelDeleteProfile());

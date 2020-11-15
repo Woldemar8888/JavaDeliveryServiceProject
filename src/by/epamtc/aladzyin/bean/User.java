@@ -10,6 +10,8 @@ public class User implements Serializable {
 	private String phone;
 	private String login;
 	private String password;
+	private int user_id;
+	private int role_id;
 	
 	public User() {	
 	}
@@ -53,6 +55,22 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+	
+	public int getRole_id() {
+		return role_id;
+	}
+
+	public void setRole_id(int role_id) {
+		this.role_id = role_id;
+	}
 
 	@Override
 	public int hashCode() {
@@ -62,7 +80,9 @@ public class User implements Serializable {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + role_id;
 		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
+		result = prime * result + user_id;
 		return result;
 	}
 
@@ -95,10 +115,14 @@ public class User implements Serializable {
 				return false;
 		} else if (!phone.equals(other.phone))
 			return false;
+		if (role_id != other.role_id)
+			return false;
 		if (surname == null) {
 			if (other.surname != null)
 				return false;
 		} else if (!surname.equals(other.surname))
+			return false;
+		if (user_id != other.user_id)
 			return false;
 		return true;
 	}
@@ -106,6 +130,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [name=" + name + ", surname=" + surname + ", phone=" + phone + ", login=" + login + ", password="
-				+ password + "]";
+				+ password + ", user_id=" + user_id + ", role_id=" + role_id + "]";
 	}
+
 }

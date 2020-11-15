@@ -25,6 +25,10 @@ body {
 	height: 100vh;
 }
 
+.separator {
+	margin-top: 25px;
+}
+
 header {
 	padding: 10px;
 }
@@ -161,4 +165,31 @@ footer {
     font-weight: bold;
     text-transform: uppercase;	
 }
+
+#user_orders, #order_goods {
+	display: inline-block;
+}
+
+table, td, th {
+	border: 1px solid black;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+td, th {
+	padding: 5px;
+	background: #aaa;
+	
+}
+
+th {
+	font-size: 20px;
+}
+
+
+
+
+
 

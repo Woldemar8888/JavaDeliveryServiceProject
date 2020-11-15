@@ -12,8 +12,6 @@
 	src="${pageContext.request.contextPath}/js/script.js"></script>
 </head>
 <body>
-
 	<c:redirect url="controller?command=go_to_main_page"/>
-	
 </body>
 </html>

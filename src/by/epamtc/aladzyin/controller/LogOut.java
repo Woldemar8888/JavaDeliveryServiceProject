@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 public class LogOut implements Command {
 
 	private static final String ATTRIBUTE_USER = "user";
+	private static final String ATTRIBUTE_USER_ORDER_LIST = "userOrderList";
 
     private static final String MAIN_PAGE = "controller?command=go_to_main_page";
 
@@ -20,6 +21,7 @@ public class LogOut implements Command {
         
     	if (session != null) {
             session.removeAttribute(ATTRIBUTE_USER);
+            session.removeAttribute(ATTRIBUTE_USER_ORDER_LIST);
         }
         
         response.sendRedirect(MAIN_PAGE);

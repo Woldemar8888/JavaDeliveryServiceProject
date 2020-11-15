@@ -60,7 +60,7 @@ public class SaveUserDataChanges implements Command {
 			session.setAttribute("isEditMode", false);
 			
 			if(isChanged) {
-				request.getSession().setAttribute("user", user);
+				session.setAttribute("user", user);
 				page = USER_PAGE;
 			}else {
 				request.setAttribute("error", "something bad with your login");
